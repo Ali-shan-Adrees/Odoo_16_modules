@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="delivery_mode.tree">
+            <field name="name">delivery_mode.tree</field>
+            <field name="model">delivery.mode</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+        <record id="sale_view_order_form_ext" model="ir.ui.view">
+            <field name="name">sale.view_order_form.Ext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@name='other_information']/group/group[@name='sale_reporting']/group" position="inside">
+                    <field name="delivery_mode" string="Delivery Mode" />
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="delivery_mode.form">
+            <field name="name">delivery_mode.form</field>
+            <field name="model">delivery.mode</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="delivery_mode.action_window">
+            <field name="name">Delivery Mode</field>
+            <field name="res_model">delivery.mode</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Delivery Mode" id="delivery_mode.menu_root" sequence="1" action="delivery_mode.action_window" parent="sale.menu_sale_config" />
+    </data>
+</odoo>
